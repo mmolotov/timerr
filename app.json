@@ -1,0 +1,62 @@
+{
+  "configVersion": "v2",
+  "app": {
+    "appId": 1032854,
+    "appName": "Timerr",
+    "appType": "app",
+    "version": {
+      "code": 1,
+      "name": "1.0.0"
+    },
+    "icon": "icon.png",
+    "vender": "zepp",
+    "description": "Timer with bip-bip features"
+  },
+  "permissions": [
+    "data:os.device.info",
+    "device:os.local_storage",
+    "data:user.hd.calorie"
+  ],
+  "runtime": {
+    "apiVersion": {
+      "compatible": "2.0.0",
+      "target": "2.0.0",
+      "minVersion": "2.0.0"
+    }
+  },
+  "targets": {
+    "trex": {
+      "module": {
+        "page": {
+          "pages": [
+            "page/select_predefined/select_timer",
+            "page/select_predefined/select_interval",
+            "page/timer_progress/timer_progress",
+            "page/create_timer/create_timer",
+            "page/create_timer/create_interval"
+          ]
+        }
+      },
+      "platforms": [
+        {
+          "name": "t-rex-ultra",
+          "deviceSource": 6553856
+        },
+        {
+          "name": "t-rex-ultra-1",
+          "deviceSource": 6553857
+        }
+      ],
+      "designWidth": 454
+    }
+  },
+  "i18n": {
+    "en-US": {
+      "appName": "Timerr"
+    },
+    "ru": {
+      "appName": "Timerr"
+    }
+  },
+  "defaultLanguage": "ru-RU"
+}

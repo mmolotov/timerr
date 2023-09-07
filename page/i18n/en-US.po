@@ -1,0 +1,26 @@
+msgid "appName"
+msgstr "Timerr"
+
+msgid "select_timer"
+msgstr "Select timer"
+
+msgid "select_interval"
+msgstr "Select interval"
+
+msgid "unit_second"
+msgstr "sec"
+
+msgid "unit_minute"
+msgstr "min"
+
+msgid "unit_hour"
+msgstr "hour"
+
+msgid "timer_progress"
+msgstr "Countdown"
+
+msgid "create_timer"
+msgstr "New timer"
+
+msgid "create_interval"
+msgstr "New interval"

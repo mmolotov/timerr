@@ -1,0 +1,27 @@
+msgid "appName"
+msgstr "Timerr"
+
+msgid "select_timer"
+msgstr "Задайте таймер"
+
+msgid "select_interval"
+msgstr "Задайте интервал для сигнала"
+
+msgid "unit_second"
+msgstr "сек"
+
+msgid "unit_minute"
+msgstr "мин"
+
+msgid "unit_hour"
+msgstr "час"
+
+msgid "timer_progress"
+msgstr "Обратный отсчет"
+msgstr "час"
+
+msgid "create_timer"
+msgstr "Новый таймер"
+
+msgid "create_interval"
+msgstr "Новый интервал для сигнала"
