@@ -133,7 +133,6 @@ Page({
     createStopButton() {
         return createWidget(widget.BUTTON,
                 COMMON.STANDARD_BOTTOM_BUTTON_STYLE_ACTION(CONSTANTS.img.STOP, CONSTANTS.img.STOP_PRESSED, (arg) => {
-                    getApp()._options.globalData.openMain = true
                     back()
                 }))
     },
@@ -141,7 +140,6 @@ Page({
     createCancelButton() {
         return createWidget(widget.BUTTON, TIMER_PROGRESS.CANCEL_BUTTON((arg) => {
             this.doVibro()
-            getApp()._options.globalData.openMain = true
             back()
         }))
     },

@@ -18,12 +18,14 @@ const standardTimers = [
 ]
 
 SelectPredefinedTimerPage({
-    header:        getText(CONSTANTS.i18n.SELECT_TIMER_HEADER),
-    timersList:    standardTimers,
-    addButtonLink: CONSTANTS.pages.CREATE_TIMER,
-    timerHandler:  function (button) {
+    header:           getText(CONSTANTS.i18n.SELECT_TIMER_HEADER),
+    timersList:       standardTimers,
+    timerHandler:     function (button) {
         getApp()._options.globalData.timerModel.timer = button.getProperty(prop.DATASET).timer
         push({url: CONSTANTS.pages.SELECT_INTERVAL})
+    },
+    addButtonHandler: function () {
+        push({url: CONSTANTS.pages.CREATE_TIMER})
     }
 })
 
