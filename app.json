@@ -10,7 +10,7 @@
     },
     "icon": "icon.png",
     "vender": "zepp",
-    "description": "Timer with bip-bip features"
+    "description": "Timer with additional interval-based notification feature"
   },
   "permissions": [
     "data:os.device.info",
@@ -53,9 +53,9 @@
     "en-US": {
       "appName": "Timerr"
     },
-    "ru": {
+    "ru-RU": {
       "appName": "Timerr"
     }
   },
-  "defaultLanguage": "ru-RU"
+  "defaultLanguage": "en-US"
 }

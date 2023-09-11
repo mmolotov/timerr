@@ -20,7 +20,7 @@ const standardTimers = [
 
 SelectPredefinedTimerPage({
     header:        getText(CONSTANTS.i18n.SELECT_INTERVAL_HEADER),
-    timersList:    standardTimers, // todo: filter intervals to be less then timer?
+    timersList:    standardTimers,
     addButtonLink: CONSTANTS.pages.CREATE_INTERVAL,
     timerHandler:  function (button) {
         getApp()._options.globalData.timerModel.interval = button.getProperty(prop.DATASET).timer

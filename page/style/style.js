@@ -3,7 +3,7 @@ import {align, text_style} from '@zos/ui'
 import {CONSTANTS, zeroPad} from '../common'
 
 // COMMON
-const standard_button_size = 108
+const standard_button_size = 88
 export const {width: DEVICE_WIDTH, height: DEVICE_HEIGHT} = getDeviceInfo()
 export const COLORS = {
     SYS:       {
