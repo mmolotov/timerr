@@ -1,11 +1,11 @@
-import { prop } from '@zos/ui'
-import { replace } from '@zos/router'
+import {prop} from '@zos/ui'
+import {replace} from '@zos/router'
 
-import { Timer, Units, CONSTANTS, getText } from '../common'
+import {CONSTANTS, getText, Timer, Units} from '../common'
 import SelectPredefinedTimerPage from './select_predefined_template'
 
-const standartTimers = [
-    new Timer(0, Units.SEC, 0, { dysplayName: '-' }),
+const standardTimers = [
+    new Timer(0, Units.SEC, 0, {displayName: '-'}),
     new Timer(5, Units.SEC, 5),
     new Timer(10, Units.SEC, 10),
     new Timer(30, Units.SEC, 30),
@@ -19,11 +19,11 @@ const standartTimers = [
 ]
 
 SelectPredefinedTimerPage({
-    header: getText(CONSTANTS.i18n.SELECT_INTERVAL_HEADER),
-    timersList: standartTimers, // todo: filter intervals to be less then timer?
+    header:        getText(CONSTANTS.i18n.SELECT_INTERVAL_HEADER),
+    timersList:    standardTimers, // todo: filter intervals to be less then timer?
     addButtonLink: CONSTANTS.pages.CREATE_INTERVAL,
-    timerHandler: function (button) {
+    timerHandler:  function (button) {
         getApp()._options.globalData.timerModel.interval = button.getProperty(prop.DATASET).timer
-        replace({ url: CONSTANTS.pages.TIMER_PROGRESS })
+        replace({url: CONSTANTS.pages.TIMER_PROGRESS})
     }
 })

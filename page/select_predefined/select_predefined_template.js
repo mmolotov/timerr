@@ -1,9 +1,9 @@
-import { Vibrator, VIBRATOR_SCENE_SHORT_LIGHT } from '@zos/sensor'
-import { createWidget, widget, event, prop } from '@zos/ui'
-import { push } from '@zos/router'
+import {Vibrator, VIBRATOR_SCENE_SHORT_LIGHT} from '@zos/sensor'
+import {createWidget, event, prop, widget} from '@zos/ui'
+import {push} from '@zos/router'
 
-import { CONSTANTS, getText } from '../common'
-import { COMMON, SELECT_PREDEFINED } from '../style/style'
+import {CONSTANTS, getText} from '../common'
+import {COMMON, SELECT_PREDEFINED} from '../style/style'
 
 function SelectPredefinedTimerPage(args) {
     const {
@@ -13,7 +13,7 @@ function SelectPredefinedTimerPage(args) {
         addButtonStyle = COMMON.STANDARD_BOTTOM_BUTTON_STYLE(CONSTANTS.img.PLUS, CONSTANTS.img.PLUS_PRESSED),
         timerHandler,
         timersList,
-        addButtonLink,
+        addButtonLink
     } = args
 
     Page({
@@ -46,22 +46,24 @@ function SelectPredefinedTimerPage(args) {
         },
         renderDefaultTimers(container, timers) {
             for (let i = 0, row = 0, column = 0; i < timers.length; i++) {
-                if (column == 2) {
+                if (column === 2) {
                     column = 0
                     row++
                 }
                 let timer = timers[i]
-                timerButton = container.createWidget(widget.BUTTON, SELECT_PREDEFINED.TIMER_BUTTON_STYLE(timer, row, column++, this.wrapWithVibro(timerHandler)))
-                timerButton.setProperty(prop.DATASET, { timer: timer })
+                const timerButton = container.createWidget(widget.BUTTON,
+                        SELECT_PREDEFINED.TIMER_BUTTON_STYLE(timer, row, column++, this.wrapWithVibro(timerHandler)))
+                timerButton.setProperty(prop.DATASET, {timer: timer})
             }
         },
         createAddButton() {
             const addButton = createWidget(widget.BUTTON, addButtonStyle)
             addButton.addEventListener(event.CLICK_DOWN, (e) => {
                 this.doVibro()
-                push({ url: addButtonLink})
+                push({url: addButtonLink})
             })
         }
     })
 }
+
 export default SelectPredefinedTimerPage

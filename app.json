@@ -14,8 +14,7 @@
   },
   "permissions": [
     "data:os.device.info",
-    "device:os.local_storage",
-    "data:user.hd.calorie"
+    "device:os.local_storage"
   ],
   "runtime": {
     "apiVersion": {
