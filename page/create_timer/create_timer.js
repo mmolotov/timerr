@@ -1,4 +1,4 @@
-import {push} from '@zos/router'
+import {replace} from '@zos/router'
 
 import {CONSTANTS, getText} from '../common'
 import CreateNewTimerPage from './create_timer_template'
@@ -8,6 +8,6 @@ CreateNewTimerPage({
     pageKey:        'create.timer',
     confirmHandler: function (timer) {
         getApp()._options.globalData.timerModel.timer = timer
-        push({url: CONSTANTS.pages.SELECT_INTERVAL})
+        replace({url: CONSTANTS.pages.SELECT_INTERVAL})
     }
 })

@@ -1,6 +1,5 @@
 import {Vibrator, VIBRATOR_SCENE_SHORT_LIGHT} from '@zos/sensor'
 import {createWidget, event, prop, widget} from '@zos/ui'
-import {push} from '@zos/router'
 
 import {CONSTANTS, getText} from '../common'
 import {COMMON, SELECT_PREDEFINED} from '../style/style'
@@ -13,12 +12,11 @@ function SelectPredefinedTimerPage(args) {
         addButtonStyle = COMMON.STANDARD_BOTTOM_BUTTON_STYLE(CONSTANTS.img.PLUS, CONSTANTS.img.PLUS_PRESSED),
         timerHandler,
         timersList,
-        addButtonLink
+        addButtonHandler
     } = args
 
     Page({
         onInit() {
-            getApp()._options.globalData.openMain = false
         },
 
         build() {
@@ -60,7 +58,7 @@ function SelectPredefinedTimerPage(args) {
             const addButton = createWidget(widget.BUTTON, addButtonStyle)
             addButton.addEventListener(event.CLICK_DOWN, (e) => {
                 this.doVibro()
-                push({url: addButtonLink})
+                addButtonHandler()
             })
         }
     })

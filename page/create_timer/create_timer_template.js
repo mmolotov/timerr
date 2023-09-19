@@ -1,4 +1,3 @@
-import {back} from '@zos/router'
 import {Vibrator, VIBRATOR_SCENE_SHORT_LIGHT} from '@zos/sensor'
 import {localStorage} from '@zos/storage'
 import {createWidget, deleteWidget, event, prop, widget} from '@zos/ui'
@@ -23,9 +22,6 @@ function CreateNewTimerPage(args) {
 
     Page({
         onInit() {
-            if (getApp()._options.globalData.openMain) {
-                back()
-            }
         },
         build() {
             this.hh = localStorage.getItem(`${pageKey}.hh`) ? localStorage.getItem(`${pageKey}.hh`) : 0

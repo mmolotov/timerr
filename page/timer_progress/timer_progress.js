@@ -1,6 +1,6 @@
 import {back} from '@zos/router'
 import {createWidget, deleteWidget, prop, widget} from '@zos/ui'
-import {Time, Vibrator, VIBRATOR_SCENE_TIMER} from '@zos/sensor'
+import {Time, Vibrator, VIBRATOR_SCENE_DURATION_LONG, VIBRATOR_SCENE_SHORT_LIGHT, VIBRATOR_SCENE_TIMER} from '@zos/sensor'
 import {pausePalmScreenOff, resetPalmScreenOff} from '@zos/display'
 
 import {CONSTANTS, getText, zeroPad} from '../common'
@@ -59,7 +59,7 @@ Page({
                 this.startBlinkInterval()
                 this.createStopButton()
                 this.deleteAdditionalButtons()
-                this.doVibro()
+                this.doVibro(VIBRATOR_SCENE_TIMER)
             } else {
                 this.notifyOnInterval(remainingSeconds)
             }
@@ -82,7 +82,7 @@ Page({
             if (this.lastReminder) {
                 const now = this.time.getTime()
                 if (now - this.lastReminder >= this.interval.valueSeconds * CONSTANTS.seconds.mili) {
-                    this.doVibro()
+                    this.doVibro(VIBRATOR_SCENE_DURATION_LONG)
                     this.switchTimerDisplayColor(true)
                     this.lastReminder = now
                 } else {
@@ -124,24 +124,22 @@ Page({
         }
     },
 
-    doVibro() {
+    doVibro(scene = VIBRATOR_SCENE_SHORT_LIGHT) {
         this.vibro.stop()
-        this.vibro.setMode(VIBRATOR_SCENE_TIMER)
+        this.vibro.setMode(scene)
         this.vibro.start()
     },
 
     createStopButton() {
         return createWidget(widget.BUTTON,
                 COMMON.STANDARD_BOTTOM_BUTTON_STYLE_ACTION(CONSTANTS.img.STOP, CONSTANTS.img.STOP_PRESSED, (arg) => {
-                    getApp()._options.globalData.openMain = true
                     back()
                 }))
     },
 
     createCancelButton() {
         return createWidget(widget.BUTTON, TIMER_PROGRESS.CANCEL_BUTTON((arg) => {
-            this.doVibro()
-            getApp()._options.globalData.openMain = true
+            this.doVibro(VIBRATOR_SCENE_SHORT_LIGHT)
             back()
         }))
     },
@@ -149,7 +147,7 @@ Page({
     createPauseButton() {
         return createWidget(widget.BUTTON,
                 TIMER_PROGRESS.PAUSE_RESUME_BUTTON(CONSTANTS.img.PAUSE, CONSTANTS.img.PAUSE_PRESSED, (button) => {
-                    this.doVibro()
+                    this.doVibro(VIBRATOR_SCENE_SHORT_LIGHT)
                     this.stopProcesses()
                     this.pause = this.time.getTime()
                     this.resumeButton = this.createResumeButton()
@@ -160,7 +158,7 @@ Page({
     createResumeButton() {
         return createWidget(widget.BUTTON,
                 TIMER_PROGRESS.PAUSE_RESUME_BUTTON(CONSTANTS.img.RESUME, CONSTANTS.img.RESUME_PRESSED, (button) => {
-                    this.doVibro()
+                    this.doVibro(VIBRATOR_SCENE_SHORT_LIGHT)
                     const pauseTime = this.time.getTime() - this.pause
                     this.end += pauseTime
                     this.lastReminder += pauseTime
