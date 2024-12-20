@@ -18,7 +18,6 @@ msgstr "час"
 
 msgid "timer_progress"
 msgstr "Обратный отсчет"
-msgstr "час"
 
 msgid "create_timer"
 msgstr "Новый таймер"
