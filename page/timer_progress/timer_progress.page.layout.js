@@ -11,8 +11,8 @@ const tickHalfWidth = tickWidth / 2;
 const ticksTotal = 120
 
 const circleRadius = (Math.min(DEVICE_HEIGHT, DEVICE_WIDTH) - tickWidth) / 2
-const circeCenterX = circleRadius + tickHalfWidth
-const circeCenterY = DEVICE_HEIGHT - circleRadius - tickHalfWidth
+const circeCenterX = DEVICE_WIDTH / 2
+const circeCenterY = DEVICE_HEIGHT / 2
 
 export const timerDisplaySize = px(80)
 export const circleButtonSize = px(116)
