@@ -65,6 +65,9 @@ export const COLORS = {
 }
 
 // STYLES
+export const headerTextSize = px(40)
+export const headerY = headerTextSize
+export const headerH = px(headerTextSize * 1.5)
 export const COMMON_LAYOUT = {
     CONTAINERS: {
         fullScreenContainer(scrollEnabled = false, zIndex = 0) {
@@ -84,7 +87,7 @@ export const COMMON_LAYOUT = {
         }
     },
     HEADERS:    {
-        header(pageName = '', yShift = 0) {
+        header(pageName = '', customY = 0) {
             return {
                 color:      COLORS.TEXT.TITLE,
                 align_h:    align.CENTER_H,
@@ -92,10 +95,10 @@ export const COMMON_LAYOUT = {
                 text_style: text_style.NONE,
                 text:       getText(pageName),
                 x:          DEVICE_WIDTH / 5,
-                y:          px(40 + yShift),
+                y:          customY ? customY : headerTextSize,
                 w:          DEVICE_WIDTH * 3 / 5,
-                h:          px(40),
-                text_size:  px(35)
+                h:          headerH,
+                text_size:  headerTextSize
             }
         }
     },

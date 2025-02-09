@@ -1,4 +1,4 @@
-import {prop} from '@zos/ui';
+import {prop, setStatusBarVisible} from '@zos/ui';
 import {replace} from '@zos/router'
 
 import {renderPage} from './selection.page.layout';
@@ -21,10 +21,11 @@ const predefinedSpans = [
 
 Page({
     onInit(params) {
+        setStatusBarVisible(false)
     },
     build() {
         renderPage(
-                CONSTANTS.pages.SELECT_TIMER.name,
+                CONSTANTS.pages.SELECT_INTERVAL.name,
                 predefinedSpans,
                 () => {
                     replace({url: CONSTANTS.pages.CREATE_INTERVAL.getUrl()})

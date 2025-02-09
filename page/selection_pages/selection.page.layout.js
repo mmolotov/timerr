@@ -1,24 +1,21 @@
 import {createWidget, prop, widget} from '@zos/ui';
 import {px} from '@zos/utils';
 
-import {COMMON_LAYOUT} from '../common.layout';
+import {COMMON_LAYOUT, DEVICE_HEIGHT, DEVICE_WIDTH, headerH} from '../common.layout';
 import {CONSTANTS, TimeSpan} from '../common';
 import {vibroCallback} from '../../utils';
 
 // SELECT TIMERS, INTERVALS
-const cell_size = px(200)
-const timer_size = px(170)
-const cell_padding_x = px(50)
-const cell_padding_y = px(57)
+const spanButtonSize = px(170)
 const columnsNumber = 2
 
 const CONTROLS = {
     timeSpanButton(timeSpan, row = 0, column = 0, clickCallback) {
         return {
-            x:          column * cell_size + cell_padding_x,
-            y:          row * cell_size + cell_padding_y * 2,
-            w:          timer_size,
-            h:          timer_size,
+            x:          (column * DEVICE_WIDTH + DEVICE_WIDTH / 2 - spanButtonSize) / 2,
+            y:          headerH * 2.5 + row * (spanButtonSize + DEVICE_HEIGHT * 0.05),
+            w:          spanButtonSize,
+            h:          spanButtonSize,
             text:       timeSpan.getDisplayName(),
             text_size:  px(30),
             normal_src: timeSpan.img,

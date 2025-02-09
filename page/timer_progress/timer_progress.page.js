@@ -1,5 +1,5 @@
 import {back} from '@zos/router';
-import {createWidget, deleteWidget, widget} from '@zos/ui';
+import {createWidget, deleteWidget, setStatusBarVisible, widget} from '@zos/ui';
 import {Time} from '@zos/sensor';
 
 import {COMMON_LAYOUT} from '../common.layout';
@@ -24,6 +24,7 @@ const intervalSeconds = getFromStorage(CONSTANTS.session.interval)
 
 Page({
     onInit(params) {
+        setStatusBarVisible(false)
         pauseScreenOff()
     },
     build() {
@@ -32,7 +33,7 @@ Page({
         let timerProcess
         let pauseStartTime
         let lastReminderTime
-        const header = createWidget(widget.TEXT, COMMON_LAYOUT.HEADERS.header(CONSTANTS.pages.TIMER_PROGRESS.name, 50))
+        const header = createWidget(widget.TEXT, COMMON_LAYOUT.HEADERS.header(CONSTANTS.pages.TIMER_PROGRESS.name, CONTROLS.headerY))
         const canvas = createWidget(widget.CANVAS, CONTROLS.CANVAS_LAYOUT)
         const timerLabel = createWidget(widget.TEXT, CONTROLS.remainingTimeLabel(getRemainingTimeText(timerSeconds)))
         let cancelButton = createWidget(widget.BUTTON, CONTROLS.cancelButton((btn) => {

@@ -1,7 +1,7 @@
 import {px} from '@zos/utils';
 import {align, prop, text_style} from '@zos/ui'
 
-import {COLORS, COMMON_LAYOUT, DEVICE_HEIGHT, DEVICE_WIDTH} from '../common.layout';
+import {COLORS, COMMON_LAYOUT, DEVICE_HEIGHT, DEVICE_WIDTH, headerY} from '../common.layout';
 import {CONSTANTS} from '../common';
 import {vibroCallback} from '../../utils';
 
@@ -10,8 +10,13 @@ const tickHeight = px(25)
 const tickHalfWidth = tickWidth / 2;
 const ticksTotal = 120
 
-const timer_display_size = px(80)
-const circle_button_size = px(116)
+const circleRadius = (Math.min(DEVICE_HEIGHT, DEVICE_WIDTH) - tickWidth) / 2
+const circeCenterX = circleRadius + tickHalfWidth
+const circeCenterY = DEVICE_HEIGHT - circleRadius - tickHalfWidth
+
+export const timerDisplaySize = px(80)
+export const circleButtonSize = px(116)
+const circleButtonPaddingX = DEVICE_WIDTH * 0.05
 
 const CONTROLS = {
     CANVAS_LAYOUT: {
@@ -24,18 +29,16 @@ const CONTROLS = {
         COLOR_ACTIVE:    COLORS.SYS.HIGHLIGHT,
         COLOR_IN_ACTIVE: COLORS.SYS.HIGHLIGHT_DISABLED
     },
-    CIRCLE:        {
-        RADIUS: (DEVICE_WIDTH - tickWidth) / 2,
-        calculateAngleForTick(i) {
-            return (-i * 3 + 90) * Math.PI / 180
-        }
+    headerY:       DEVICE_HEIGHT - circleRadius * 2 + tickHeight + headerY,
+    calculateAngleForTick(i) {
+        return (-i * 3 + 90) * Math.PI / 180
     },
     remainingTimeLabel(value = '') {
         return {
             x:          0,
-            y:          (DEVICE_HEIGHT - timer_display_size) / 2,
+            y:          circeCenterY - timerDisplaySize / 2,
             w:          DEVICE_WIDTH,
-            h:          timer_display_size,
+            h:          timerDisplaySize,
             color:      COLORS.TEXT.TITLE,
             text_size:  px(60),
             align_h:    align.CENTER_H,
@@ -46,10 +49,10 @@ const CONTROLS = {
     },
     circleButton(normalSrc = '', pressSrc = '', clickCallback, left = true) {
         return {
-            x:          left ? px(DEVICE_WIDTH / 2 - circle_button_size - 10) : px(DEVICE_WIDTH / 2 + 10),
-            y:          (DEVICE_HEIGHT + timer_display_size) / 2,
-            w:          circle_button_size,
-            h:          circle_button_size,
+            x:          left ? DEVICE_WIDTH / 2 - circleButtonSize - circleButtonPaddingX : DEVICE_WIDTH / 2 + circleButtonPaddingX,
+            y:          circeCenterY + circleButtonSize / 2,
+            w:          circleButtonSize,
+            h:          circleButtonSize,
             normal_src: normalSrc,
             press_src:  pressSrc,
             click_func: vibroCallback(clickCallback)
@@ -71,16 +74,13 @@ const CONTROLS = {
         canvas.setPaint({
             line_width: tickWidth
         })
-        const radius = CONTROLS.CIRCLE.RADIUS;
-        const centerX = radius + tickHalfWidth;
-        const centerY = radius + tickHalfWidth;
         let pastTicks = Math.min(ticksTotal, Math.max(0, ticksTotal / 100 * progress))
         for (let i = 0; i < ticksTotal; i++) {
-            const angle = CONTROLS.CIRCLE.calculateAngleForTick(i);
-            let startX = centerX + (radius - tickHalfWidth) * Math.cos(angle);
-            let startY = centerY + (radius - tickHalfWidth) * Math.sin(angle);
-            let endX = centerX + (radius - tickHeight) * Math.cos(angle);
-            let endY = centerY + (radius - tickHeight) * Math.sin(angle);
+            const angle = CONTROLS.calculateAngleForTick(i);
+            let startX = circeCenterX + (circleRadius - tickHalfWidth) * Math.cos(angle);
+            let startY = circeCenterY + (circleRadius - tickHalfWidth) * Math.sin(angle);
+            let endX = circeCenterX + (circleRadius - tickHeight) * Math.cos(angle);
+            let endY = circeCenterY + (circleRadius - tickHeight) * Math.sin(angle);
             canvas.drawLine({
                 x1:    startX,
                 y1:    startY,

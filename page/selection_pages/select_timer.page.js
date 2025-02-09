@@ -1,4 +1,4 @@
-import {prop} from '@zos/ui';
+import {prop, setStatusBarVisible} from '@zos/ui'
 import {push} from '@zos/router'
 
 import {renderPage} from './selection.page.layout';
@@ -20,6 +20,7 @@ const predefinedSpans = [
 
 Page({
     onInit(params) {
+        setStatusBarVisible(false)
     },
     build() {
         renderPage(

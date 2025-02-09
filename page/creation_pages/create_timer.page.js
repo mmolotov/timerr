@@ -1,3 +1,4 @@
+import {setStatusBarVisible} from '@zos/ui';
 import {replace} from '@zos/router'
 
 import {renderPage, toSeconds} from './creation.page.layout';
@@ -6,6 +7,7 @@ import {CONSTANTS} from '../common';
 
 Page({
     onInit(params) {
+        setStatusBarVisible(false)
     },
     build() {
         renderPage(
