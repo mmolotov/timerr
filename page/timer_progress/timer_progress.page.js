@@ -1,5 +1,5 @@
 import {back} from '@zos/router';
-import {createWidget, deleteWidget, prop, widget} from '@zos/ui';
+import {createWidget, deleteWidget, widget} from '@zos/ui';
 import {Time} from '@zos/sensor';
 
 import {COMMON_LAYOUT} from '../common.layout';
@@ -92,22 +92,22 @@ Page({
             return Math.min(100, Math.floor((totalSeconds - remainingSeconds) / totalSeconds * 100))
         }
 
-        function setTimerDisplayText(timerLabel, text = '') {
-            timerLabel.setProperty(prop.MORE, {
-                text: text
-            })
-        }
-
         function deleteAdditionalButtons() {
             deleteWidget(cancelButton)
             deleteWidget(pauseButton)
             deleteWidget(resumeButton)
         }
 
+        function shouldNotify(currentlyRemaining = 0) {
+            return intervalSeconds > 0 && currentlyRemaining > 0
+                    && currentlyRemaining < timerSeconds
+                    && currentlyRemaining % intervalSeconds === 0
+        }
+
         function startTimer(endTime = 0, timerLabel, canvas) {
             return setInterval(() => {
                 const currentlyRemaining = getRemainingSeconds(endTime);
-                setTimerDisplayText(timerLabel, getRemainingTimeText(currentlyRemaining))
+                CONTROLS.setTimerDisplayText(timerLabel, getRemainingTimeText(currentlyRemaining), shouldNotify(currentlyRemaining))
                 if (currentlyRemaining === 0) {
                     clearInterval(timerProcess)
                     deleteAdditionalButtons()
@@ -117,7 +117,7 @@ Page({
                     startVibration()
                     startTimerDisplayBlinking(timerLabel)
                 } else {
-                    notifyOnInterval(timerLabel)
+                    notifyOnInterval()
                 }
                 if (remainingSeconds != currentlyRemaining) {
                     remainingSeconds = currentlyRemaining
@@ -126,16 +126,14 @@ Page({
             }, PROCESS_DELAY_MS)
         }
 
-        function notifyOnInterval(timerLabel) {
+        function notifyOnInterval() {
             if (intervalSeconds > 0) {
                 if (lastReminderTime) {
                     const now = TIME.getTime()
                     if (now - lastReminderTime >= secondsToMillis(intervalSeconds)) {
                         doLongVibro()
-                        CONTROLS.switchTimerDisplayColor(timerLabel, true)
                         lastReminderTime = now
                     } else {
-                        CONTROLS.switchTimerDisplayColor(timerLabel, false)
                     }
                 } else {
                     lastReminderTime = start

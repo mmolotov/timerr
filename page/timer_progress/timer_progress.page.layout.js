@@ -90,10 +90,16 @@ const CONTROLS = {
             })
         }
     },
-    switchTimerDisplayColor(timerLabel, isWarning) {
+    switchTimerDisplayColor(timerLabel, isWarning = false) {
         timerLabel.setProperty(prop.MORE, {
             color: isWarning ? COLORS.TEXT.WARNING : COLORS.TEXT.TITLE
         })
+    },
+    setTimerDisplayText(timerLabel, text = '', isWarning = false) {
+        timerLabel.setProperty(prop.MORE, {
+            text: text
+        })
+        CONTROLS.switchTimerDisplayColor(timerLabel, isWarning)
     }
 }
 export {CONTROLS}
