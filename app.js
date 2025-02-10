@@ -1,8 +1,11 @@
-App({
-  globalData: {},
-  onCreate(options) {
-  },
+import {setStatusBarVisible} from '@zos/ui'
 
-  onDestroy(options) {
-  },
+App({
+    globalData: {},
+    onCreate(options) {
+        setStatusBarVisible(false)
+    },
+
+    onDestroy(options) {
+    }
 });
