@@ -69,7 +69,7 @@ function renderPage(pageName = '', confirmCallback) {
 }
 
 function toSeconds(hh = 0, mm = 0, ss = 0) {
-    return hh * 360 + mm * 60 + ss
+    return hh * 3600 + mm * 60 + ss
 }
 
 export {CONTROLS, renderPage, toSeconds}

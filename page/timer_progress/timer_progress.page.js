@@ -49,8 +49,8 @@ Page({
         timerProcess = startTimer(end, timerLabel, canvas)
 
         function getRemainingTimeText(valueSeconds) {
-            const remainingHours = Math.floor(valueSeconds / 360)
-            const remainingMinutes = Math.floor(valueSeconds % 360 / 60)
+            const remainingHours = Math.floor(valueSeconds / 3600)
+            const remainingMinutes = Math.floor(valueSeconds % 3600 / 60)
             const remainingSeconds = valueSeconds % 60
             if (remainingHours > 0) {
                 return `${_00(remainingHours)}:${_00(remainingMinutes)}:${_00(remainingSeconds)}`
